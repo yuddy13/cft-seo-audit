@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --sidebar-width: 220px;
+}
+
+body {
+  @apply bg-gray-50 text-gray-900 antialiased;
+}
+
+.stat-card {
+  @apply bg-white rounded-lg border border-gray-200 p-5 shadow-sm;
+}
+
+.page-title {
+  @apply text-2xl font-bold text-gray-900 mb-1;
+}
+
+.section-header {
+  @apply text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3;
+}
+
+.badge-universal { @apply bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded-full; }
+.badge-dual { @apply bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded-full; }
+.badge-single { @apply bg-gray-100 text-gray-700 text-xs font-medium px-2 py-0.5 rounded-full; }
+.badge-error { @apply bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded-full; }
+.badge-warn { @apply bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-0.5 rounded-full; }
+
+input[type="text"], input[type="password"], input[type="number"], textarea, select {
+  @apply block w-full rounded-md border border-gray-300 px-3 py-2 text-sm
+         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+}
+
+.btn {
+  @apply inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium
+         transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+.btn-primary { @apply btn bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500; }
+.btn-secondary { @apply btn bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 focus:ring-gray-400; }
+.btn-danger { @apply btn bg-red-600 text-white hover:bg-red-700 focus:ring-red-500; }
+.btn-ghost { @apply btn text-gray-600 hover:bg-gray-100 focus:ring-gray-400; }
+.btn-success { @apply btn bg-green-600 text-white hover:bg-green-700 focus:ring-green-500; }
+
+.table-auto { @apply w-full text-sm; }
+.table-auto th { @apply text-left font-medium text-gray-500 py-2 px-3 bg-gray-50 border-b border-gray-200; }
+.table-auto td { @apply py-2.5 px-3 border-b border-gray-100; }
+.table-auto tr:last-child td { @apply border-0; }
+.table-auto tr:hover td { @apply bg-gray-50; }
