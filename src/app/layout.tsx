@@ -3,20 +3,16 @@ import './globals.css';
 import Sidebar from '@/components/Sidebar';
 
 export const metadata: Metadata = {
-  title: 'Source Map Builder',
-  description: 'AI Citation Research & Source Map Starter Pack Builder',
+  title: 'CFT Source Map Builder',
+  description: 'CFT AI citation research and source mapping tool',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <div className="flex h-screen overflow-hidden">
-          <Sidebar />
-          <main className="flex-1 overflow-y-auto bg-gray-50">
-            {children}
-          </main>
-        </div>
+        <Sidebar />
+        <main className="app-main">{children}</main>
       </body>
     </html>
   );

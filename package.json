@@ -10,10 +10,9 @@
     "db:init": "node scripts/init-db.js"
   },
   "dependencies": {
-    "next": "14.2.5",
+    "next": "14.2.33",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "better-sqlite3": "^9.6.0",
     "xlsx": "^0.18.5",
     "zod": "^3.23.8",
     "clsx": "^2.1.1",
@@ -33,7 +32,6 @@
     "@types/node": "^20.14.10",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@types/better-sqlite3": "^7.6.11",
     "typescript": "^5.5.3",
     "tailwindcss": "^3.4.6",
     "postcss": "^8.4.39",
