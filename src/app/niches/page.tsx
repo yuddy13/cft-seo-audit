@@ -14,8 +14,8 @@ export default function NichesPage() {
 
   async function load() {
     setLoading(true);
-    const d = await fetch('/api/niches').then((r) => r.json()) as Niche[];
-    setNiches(d);
+    const raw = await fetch('/api/niches').then((r) => r.json());
+    setNiches(Array.isArray(raw) ? raw : []);
     setLoading(false);
   }
 

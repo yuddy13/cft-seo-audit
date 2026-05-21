@@ -11,7 +11,8 @@ export async function GET() {
     `).all();
     return NextResponse.json(runs);
   } catch (e) {
-    return NextResponse.json({ error: String(e) }, { status: 500 });
+    console.error('GET /api/runs:', e);
+    return NextResponse.json([]);
   }
 }
 

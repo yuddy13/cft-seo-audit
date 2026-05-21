@@ -27,7 +27,8 @@ export default function ResultsPage() {
   const [page, setPage] = useState(0);
 
   useEffect(() => {
-    fetch('/api/niches').then((r) => r.json()).then((d: Niche[]) => {
+    fetch('/api/niches').then((r) => r.json()).then((raw) => {
+      const d: Niche[] = Array.isArray(raw) ? raw : [];
       setNiches(d);
       if (d.length) setSelectedNiche(d[0].id);
     });
@@ -39,7 +40,7 @@ export default function ResultsPage() {
     setPage(0);
     fetch(`/api/citations?niche_id=${selectedNiche}`)
       .then((r) => r.json())
-      .then(setCitations)
+      .then((raw) => setCitations(Array.isArray(raw) ? raw : []))
       .finally(() => setLoading(false));
   }, [selectedNiche]);
 

@@ -18,6 +18,7 @@ export async function GET(req: NextRequest) {
     const rows = db.prepare(sql).all(...params);
     return NextResponse.json(rows);
   } catch (e) {
-    return NextResponse.json({ error: String(e) }, { status: 500 });
+    console.error('GET /api/citations:', e);
+    return NextResponse.json([]);
   }
 }

@@ -25,7 +25,8 @@ export default function QueriesPage() {
   useEffect(() => {
     fetch('/api/niches')
       .then((r) => r.json())
-      .then((d: Niche[]) => {
+      .then((raw) => {
+        const d: Niche[] = Array.isArray(raw) ? raw : [];
         setNiches(d);
         if (d.length > 0) setSelectedNiche(d[0].id);
       });
@@ -36,19 +37,19 @@ export default function QueriesPage() {
     setLoading(true);
     fetch(`/api/queries?niche_id=${selectedNiche}`)
       .then((r) => r.json())
-      .then((d: Query[]) => setQueries(d))
+      .then((raw) => setQueries(Array.isArray(raw) ? raw : []))
       .finally(() => setLoading(false));
   }, [selectedNiche]);
 
   async function generate(regen = false) {
     if (!selectedNiche) return;
     setLoading(true);
-    const d = await fetch('/api/queries', {
+    const raw = await fetch('/api/queries', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ niche_id: selectedNiche, regenerate: regen }),
-    }).then((r) => r.json()) as Query[];
-    setQueries(d);
+    }).then((r) => r.json());
+    setQueries(Array.isArray(raw) ? raw : []);
     setLoading(false);
   }
 

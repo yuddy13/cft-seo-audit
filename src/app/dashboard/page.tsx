@@ -40,7 +40,21 @@ export default function DashboardPage() {
   useEffect(() => {
     fetch('/api/dashboard')
       .then((r) => r.json())
-      .then(setData)
+      .then((raw) => {
+        if (raw && typeof raw === 'object' && !raw.error) {
+          setData({
+            totalRuns: raw.totalRuns ?? 0,
+            totalCitations: raw.totalCitations ?? 0,
+            totalDomains: raw.totalDomains ?? 0,
+            totalSpend: raw.totalSpend ?? 0,
+            byModel: Array.isArray(raw.byModel) ? raw.byModel : [],
+            topDomains: Array.isArray(raw.topDomains) ? raw.topDomains : [],
+            byNiche: Array.isArray(raw.byNiche) ? raw.byNiche : [],
+            heatmap: Array.isArray(raw.heatmap) ? raw.heatmap : [],
+            recentRuns: Array.isArray(raw.recentRuns) ? raw.recentRuns : [],
+          });
+        }
+      })
       .finally(() => setLoading(false));
   }, []);
 

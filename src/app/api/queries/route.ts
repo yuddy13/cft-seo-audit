@@ -11,7 +11,8 @@ export async function GET(req: NextRequest) {
       : db.prepare('SELECT * FROM queries ORDER BY niche_id, query_num').all();
     return NextResponse.json(q);
   } catch (e) {
-    return NextResponse.json({ error: String(e) }, { status: 500 });
+    console.error('GET /api/queries:', e);
+    return NextResponse.json([]);
   }
 }
 
@@ -42,7 +43,8 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(db.prepare('SELECT * FROM queries WHERE niche_id = ? ORDER BY query_num').all(niche_id));
   } catch (e) {
-    return NextResponse.json({ error: String(e) }, { status: 500 });
+    console.error('POST /api/queries:', e);
+    return NextResponse.json([]);
   }
 }
 

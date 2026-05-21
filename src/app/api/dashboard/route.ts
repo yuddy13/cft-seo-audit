@@ -52,6 +52,10 @@ export async function GET() {
       byModel, topDomains, byNiche, heatmap, recentRuns, costOverTime,
     });
   } catch (e) {
-    return NextResponse.json({ error: String(e) }, { status: 500 });
+    console.error('GET /api/dashboard:', e);
+    return NextResponse.json({
+      totalRuns: 0, totalCitations: 0, totalDomains: 0, totalSpend: 0,
+      byModel: [], topDomains: [], byNiche: [], heatmap: [], recentRuns: [], costOverTime: [],
+    });
   }
 }

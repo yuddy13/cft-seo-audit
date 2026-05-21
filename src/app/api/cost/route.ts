@@ -45,6 +45,8 @@ export async function GET() {
 
     return NextResponse.json({ totals, byModel, byNiche, avgCostPerCall });
   } catch (e) {
-    return NextResponse.json({ error: String(e) }, { status: 500 });
+    console.error('GET /api/cost:', e);
+    const empty = { total_calls: 0, done_calls: 0, failed_calls: 0, retried_calls: 0, tokens_in: 0, tokens_out: 0, spend_usd: 0 };
+    return NextResponse.json({ totals: empty, byModel: [], byNiche: [], avgCostPerCall: 0 });
   }
 }

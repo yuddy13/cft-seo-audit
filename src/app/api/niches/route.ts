@@ -7,7 +7,8 @@ export async function GET() {
     const niches = db.prepare('SELECT * FROM niches ORDER BY id').all();
     return NextResponse.json(niches);
   } catch (e) {
-    return NextResponse.json({ error: String(e) }, { status: 500 });
+    console.error('GET /api/niches:', e);
+    return NextResponse.json([]);
   }
 }
 

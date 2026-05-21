@@ -35,14 +35,16 @@ export default function RunsPage() {
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   async function loadRuns() {
-    const d = await fetch('/api/runs').then((r) => r.json()) as Run[];
+    const raw = await fetch('/api/runs').then((r) => r.json());
+    const d: Run[] = Array.isArray(raw) ? raw : [];
     setRuns(d);
     const running = d.find((r) => r.status === 'running');
     if (running) setActiveRunId(running.id);
   }
 
   useEffect(() => {
-    fetch('/api/niches').then((r) => r.json()).then((d: Niche[]) => {
+    fetch('/api/niches').then((r) => r.json()).then((raw) => {
+      const d: Niche[] = Array.isArray(raw) ? raw : [];
       setNiches(d);
       const enabled = d.filter((n) => n.enabled).map((n) => n.id);
       setSelectedNiches(enabled.slice(0, 1));
@@ -76,6 +78,11 @@ export default function RunsPage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: runName, niche_ids: selectedNiches, is_pilot: isPilot }),
     }).then((r) => r.json()) as Run;
+
+    if (!run?.id) {
+      setCreating(false);
+      return;
+    }
 
     await fetch('/api/runs/start', {
       method: 'POST',
